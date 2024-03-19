@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         borderTopWidth: 0.2,
-        backgroundColor: 'white',
+        backgroundColor: '#4d663a',
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     },
     espacoDescricao:{
         flexDirection: 'column',
-        
-
     }
+    
+    
 });
 
 export default CardapioRestauranteExample;
