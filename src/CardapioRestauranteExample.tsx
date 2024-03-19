@@ -49,7 +49,6 @@ const renderMenuItem = ({item}: {item: MenuItem}) => (
         <Image source={item.image} style={styles.imagemH}></Image>
         <Text style={styles.text}>{item.descricao}</Text>
         <Text style={styles.text}>{item.preco}</Text>
-
         </View>
     </TouchableOpacity>
 
@@ -134,7 +133,8 @@ const styles = StyleSheet.create({
         
     },
     espacoDescricao:{
-        flexDirection:'row',
+        flexDirection: 'column',
+        
 
     }
 });
