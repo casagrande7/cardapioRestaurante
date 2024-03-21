@@ -98,6 +98,7 @@ function CardapioRestauranteExample(): React.JSX.Element {
             </Animatable.View>
             <View style={styles.alinhamentoPesquisa}>
                 <TextInput style={styles.input} placeholder="Pesquisar" placeholderTextColor={'black'}/>
+                <Image source={require('./assets/imagens/lupa.png')} style={styles.lupa}></Image>
                 
             </View>
             
