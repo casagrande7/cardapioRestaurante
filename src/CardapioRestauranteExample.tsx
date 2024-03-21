@@ -92,7 +92,14 @@ function CardapioRestauranteExample(): React.JSX.Element {
             <Animatable.View  animation={'fadeInDown'} delay={30} style={styles.header}>
                 <Image source={require('./assets/imagens/hh.png')} style={styles.imagem}></Image>
                 <Text style={styles.headerText}>FOOD KING</Text>
+                <TouchableOpacity> 
+                <Image source={require('./assets/imagens/mercado.png')} style={styles.carrinho}></Image>
+                </TouchableOpacity>
             </Animatable.View>
+            <View style={styles.alinhamentoPesquisa}>
+                <TextInput style={styles.input} placeholder="Pesquisar" placeholderTextColor={'black'}/>
+                
+            </View>
             
             <FlatList
                 showsVerticalScrollIndicator={false}
@@ -130,8 +137,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         borderRadius: 15,
         borderWidth: 2,
-        borderColor: 'white'
-
+        borderColor: 'white',
+        marginTop: 2
     },
     header: {
         backgroundColor: '#4d663a',
@@ -221,6 +228,35 @@ const styles = StyleSheet.create({
         marginRight: 40,
         textDecorationLine: 'underline',
         lineHeight: 25,
+    },
+    carrinho: {
+        height: 30,
+        width: 30,
+        marginLeft: 330,
+        marginTop: -30
+    },
+    alinhamentoPesquisa: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        width: "90%",
+    },
+    input: {
+        backgroundColor: '#D2B48C',
+        width: '90%',
+        height: 45,
+        marginBottom: 25,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'white',
+        padding: 10,
+        marginLeft: 35,
+        marginTop: 2
+    },
+    lupa: {
+        height: 30,
+        width: 30,
+
     }
 
 });
