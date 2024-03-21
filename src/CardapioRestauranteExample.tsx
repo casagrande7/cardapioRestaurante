@@ -126,7 +126,6 @@ function CardapioRestauranteExample(): React.JSX.Element {
                 </TouchableOpacity>
             </Animatable.View>
         </View>
-
     );
 }
 const styles = StyleSheet.create({
