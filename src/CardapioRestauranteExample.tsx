@@ -98,7 +98,7 @@ function CardapioRestauranteExample(): React.JSX.Element {
             </Animatable.View>
             <View style={styles.alinhamentoPesquisa}>
                 <TextInput style={styles.input} placeholder="Pesquisar" placeholderTextColor={'black'}/>
-                <Image source={require('./assets/imagens/lupa.png')} style={styles.lupa}></Image>
+                <Image source={require('./assets/imagens/lupa.eudorio.png')} style={styles.lupa}></Image>
                 
             </View>
             
@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderWidth: 2,
         borderColor: 'white',
-        marginTop: 2
     },
     header: {
         backgroundColor: '#4d663a',
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     imagemH: {
         height: 100,
         width: 100,
-        marginTop: -100,
+        marginTop: -110,
         marginLeft: 200
 
     },
@@ -257,6 +256,8 @@ const styles = StyleSheet.create({
     lupa: {
         height: 30,
         width: 30,
+        marginTop: 10,
+        marginLeft: 10
 
     }
 
