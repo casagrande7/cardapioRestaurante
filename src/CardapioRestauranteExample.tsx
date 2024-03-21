@@ -80,7 +80,9 @@ const renderMenuItem = ({ item }: { item: MenuItem }) => (
         <Image source={item.image} style={styles.imagemH}></Image>
         <TouchableOpacity>
             <Image source={require('./assets/imagens/mais.png')} style={styles.maisImagem}></Image>
-            <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
         </TouchableOpacity>
     </TouchableOpacity>
 
