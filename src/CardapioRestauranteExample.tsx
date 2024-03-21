@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     item: {
         backgroundColor: '#D2B48C',
         padding: 20,
-        marginVertical: 8,
+        marginBottom: 10,
         marginHorizontal: 16,
         borderRadius: 15,
         borderWidth: 2,
@@ -207,20 +207,6 @@ const styles = StyleSheet.create({
         marginRight: 300,
         marginTop: -8
     },
-    textMenu: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: 'white',
-        marginLeft: 240,
-        marginTop: -27
-
-    },
-    imagemMenu: {
-        marginLeft: 215,
-        height: 20,
-        width: 20,
-        marginTop: -20
-    },
     textNome: {
         fontWeight: 'bold',
         fontSize: 20,
@@ -245,8 +231,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#D2B48C',
         width: '90%',
         height: 45,
-        marginBottom: 25,
-        borderRadius: 10,
+        marginBottom: 15,
+        borderRadius: 20,
         borderWidth: 1,
         borderColor: 'white',
         padding: 10,
