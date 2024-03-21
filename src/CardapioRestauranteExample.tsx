@@ -80,6 +80,7 @@ const renderMenuItem = ({ item }: { item: MenuItem }) => (
         <Image source={item.image} style={styles.imagemH}></Image>
         <TouchableOpacity>
             <Image source={require('./assets/imagens/mais.png')} style={styles.maisImagem}></Image>
+            <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
         </TouchableOpacity>
     </TouchableOpacity>
 
@@ -186,6 +187,13 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
         marginTop: 4
+    },
+    subtracaoImagem: {
+        width: 25,
+        height: 25,
+        marginLeft: 30,
+        marginTop: -28
+
     },
     textPreco: {
         fontWeight: 'bold',
