@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { launchCamera } from "react-native-image-picker";
 
 const CadastroProduto: React.FC = () => {
     const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -7,6 +8,31 @@ const CadastroProduto: React.FC = () => {
     const [preco, setPreco] = useState<string>('');
     const [ingredientes, setIngredientes] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
+
+    const cadastrorProdutos = async () => {
+
+    }
+
+    const abrirCamera = () => {
+        const options = {
+            mediaType: 'photo',
+            includeBase64: false,
+            masHeight: 2000,
+            maxWidht: 2000
+        };
+
+        launchCamera(options, response => {
+            if(response.didCancel){
+                console.log('cancelado pelo usuário');
+            } else if(response.error){
+                console.log('erro ao abrir a camera');
+            } else {
+                let imageUri = response.uri || response.assets?.[0].uri;
+                setImagem(imageUri);
+                console.log(imageUri);
+            }
+        });
+    }
 
     return (
         <View style={styles.container}>
@@ -37,7 +63,7 @@ const CadastroProduto: React.FC = () => {
                 <TouchableOpacity style={styles.imageButton}>
                     <Text style={styles.imagemButtonText}>Selecionar Imagem</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.imageButton}>
+                <TouchableOpacity style={styles.imageButton} onPress={abrirCamera}>
                     <Text style={styles.imagemButtonText}>Tirar Foto</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button}>
