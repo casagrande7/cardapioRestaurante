@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import {StatusBar, StyleSheet, TextInput, View} from 'react-native';
-import { Text } from "react-native-animatable";
+import {Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
 const CadastroProduto: React.FC = () => {
     const [produtos, setProdutos] = useState<Produto[]>([]);
@@ -30,7 +29,21 @@ const CadastroProduto: React.FC = () => {
                 <TextInput style={styles.input}
                 placeholder="Ingredientes"
                 value={ingredientes}
-                onChangeText={setIngredientes}/>
+                onChangeText={setIngredientes}
+                multiline/>
+                <View style={styles.alinhamentoImagemSelecionada}>
+                    {imagem ? <Image source={{ uri: imagem}} style={styles.imagemSelecionada} /> : null}
+                </View>
+                <TouchableOpacity style={styles.imageButton}>
+                    <Text style={styles.imagemButtonText}>Selecionar Imagem</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.imageButton}>
+                    <Text style={styles.imagemButtonText}>Tirar Foto</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonText}>Cadastrar Produto</Text>
+                </TouchableOpacity>
+
             </View>
 
         </View>
