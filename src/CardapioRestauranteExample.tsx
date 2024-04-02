@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, StatusBar, TextInput,} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, StatusBar, TextInput} from "react-native";
 import * as Animatable from 'react-native-animatable';
 interface MenuItem {
     id: string;
@@ -73,7 +73,7 @@ const dados: MenuItem[] = [
 ];
 
 const renderMenuItem = ({ item }: { item: MenuItem }) => (
-    <TouchableOpacity style={styles.item}>
+    <View style={styles.item}>
         <Text style={styles.textNome}>{item.nome}</Text>
         <Text style={styles.text}>{item.descricao}</Text>
         <Text style={styles.textPreco}>{item.preco}</Text>
@@ -84,7 +84,7 @@ const renderMenuItem = ({ item }: { item: MenuItem }) => (
         <TouchableOpacity>
         <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
         </TouchableOpacity>
-    </TouchableOpacity>
+    </View>
 
 );
 
