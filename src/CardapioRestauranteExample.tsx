@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
         marginLeft: 30,
-        marginTop: -28
+        marginTop: -27
 
     },
     textPreco: {
