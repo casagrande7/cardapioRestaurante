@@ -11,6 +11,8 @@ const CadastroProduto: React.FC = () => {
     const [imagem, setImagem] = useState<any>('');
 
     const cadastrorProdutos = async () => {
+        try {
+            
         const formData = new FormData();
         formData.append('nome', nome);
         formData.append('preco', preco);
@@ -26,6 +28,9 @@ const CadastroProduto: React.FC = () => {
                 'Content-Type': 'multipart/form-data'
             }
         });
+    } catch(error) {
+        console.log(error);
+    }
 
     }
 
