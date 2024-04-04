@@ -10,9 +10,9 @@ const CadastroProduto: React.FC = () => {
     const [ingredientes, setIngredientes] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
 
-    const cadastrorProdutos = async () => {
+    const cadastrarProdutos = async () => {
         try {
-            
+
         const formData = new FormData();
         formData.append('nome', nome);
         formData.append('preco', preco);
@@ -23,7 +23,7 @@ const CadastroProduto: React.FC = () => {
             name: new Date() + 'jpg'
         });
 
-        const response = await axios.post('https//127.0.0.1:8000/api/produtos', formData, {
+        const response = await axios.post('http://10.137.11.216:8000/api/produtos', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -108,7 +108,7 @@ const CadastroProduto: React.FC = () => {
                 <TouchableOpacity style={styles.imageButton} onPress={abrirCamera}>
                     <Text style={styles.imagemButtonText}>Tirar Foto</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={cadastrarProdutos}>
                     <Text style={styles.buttonText}>Cadastrar Produto</Text>
                 </TouchableOpacity>
 
