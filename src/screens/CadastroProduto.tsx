@@ -81,7 +81,7 @@ const CadastroProduto: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar backgroundColor='red' barStyle='light-content'></StatusBar>
+            <StatusBar backgroundColor='#3CB371' barStyle='light-content'></StatusBar>
             <View style={styles.header}>
                 <Text style={styles.headerText}>Top Food</Text>
             </View>
@@ -103,7 +103,7 @@ const CadastroProduto: React.FC = () => {
                     onChangeText={setIngredientes}
                     multiline />
                 <View style={styles.alinhamentoImagemSelecionada}>
-                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> : null}
+                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada}/> : null}
                 </View>
                 <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
                     <Text style={styles.imagemButtonText}>Selecionar Imagem</Text>
@@ -116,6 +116,9 @@ const CadastroProduto: React.FC = () => {
                 </TouchableOpacity>
 
             </View>
+            <View style={styles.footer}>
+
+            </View>
 
         </View>
     );
@@ -124,12 +127,16 @@ const CadastroProduto: React.FC = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#3CB371'
     },
     header: {
-        backgroundColor: 'red',
-        paddingVertical: 10,
-        alignItems: 'center'
+        backgroundColor: 'white',
+        alignItems: 'center',
+        paddingVertical: 100,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 150,
+        height: 10
     },
     headerText: {
         fontSize: 20,
@@ -138,48 +145,58 @@ const styles = StyleSheet.create({
     },
     form: {
         padding: 10,
-        backgroundColor: '#f0f0f0',
-        marginBottom: 10
+        
     },
     input: {
         height: 40,
         borderColor: 'gray',
-        borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        backgroundColor: 'white',
+        fontWeight: 'bold',
+        marginTop: 10
     },
     imageButton: {
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 12
     },
     imagemButtonText: {
-        color: 'white',
+        color: '#3CB371',
         fontWeight: 'bold'
     },
     imagemSelecionada: {
-        width: 200,
-        height: 200,
+        width: 150,
+        height: 150,
         resizeMode: 'cover',
-        borderRadius: 5,
+        borderRadius: 100,
         marginBottom: 10
     },
     alinhamentoImagemSelecionada: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     button: {
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center'
     },
     buttonText: {
-        color: 'white',
+        color: '#3CB371',
         fontWeight: 'bold'
-    }
+    },
+    footer: {
+        paddingVertical: 50,
+        backgroundColor: 'white',
+        marginTop: 170,
+        alignItems: 'center',
+        borderTopRightRadius: 40,
+        borderTopLeftRadius: 40,
+    },
+   
 
 
 

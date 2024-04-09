@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { StatusBar, StyleSheet, TextInput, TouchableOpacity, } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, TextInput, TouchableOpacity, } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import { Image, View, Text } from "react-native-animatable";
 import CadastroCliente from "./CadastroCliente";
@@ -163,11 +163,12 @@ function CadastroClienteExample(): React.JSX.Element {
                 <Text style={styles.buttonText}>Cadastrar</Text>
             </TouchableOpacity>
 
-
             <View style={styles.footer}>
 
             </View>
+
         </View>
+        
     );
 }
 
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
     footer: {
         paddingVertical: 50,
         backgroundColor: 'white',
-        marginTop: 45,
+        marginTop: 40,
         alignItems: 'center',
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
@@ -201,7 +202,6 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: 'transparent',
-        
         marginTop: 40,
         fontWeight: 'bold',
         height: 50,
