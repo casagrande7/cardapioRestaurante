@@ -149,13 +149,13 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: 'gray',
+        borderBottomWidth: 2,
         marginBottom: 10,
-        paddingHorizontal: 10,
-        borderRadius: 10,
-        backgroundColor: 'white',
+        borderColor: 'white',
         fontWeight: 'bold',
-        marginTop: 10
+        marginTop: 10,
+        marginLeft: 2,
+        marginRight: 2
     },
     imageButton: {
         backgroundColor: 'white',
