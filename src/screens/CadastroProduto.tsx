@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import axios from 'axios';
 
@@ -13,24 +13,27 @@ const CadastroProduto: React.FC = () => {
     const cadastrarProdutos = async () => {
         try {
 
-        const formData = new FormData();
-        formData.append('nome', nome);
-        formData.append('preco', preco);
-        formData.append('ingredientes', ingredientes);
-        formData.append('imagem',{
-            uri: imagem,
-            type: 'image/jpeg',
-            name: new Date() + 'jpg'
-        });
+            const formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('preco', preco);
+            formData.append('ingredientes', ingredientes);
+            formData.append('imagem', {
+                uri: imagem,
+                type: 'image/jpeg',
+                name: new Date() + '.jpg'
+            });
 
-        const response = await axios.post('http://10.137.11.216:8000/api/produtos', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-    } catch(error) {
-        console.log(error);
-    }
+            console.log(formData)
+            const response = await axios.post('http://10.137.11.216:8000/api/produtos', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response.data)
+
+        } catch (error) {
+            console.log(error);
+        }
 
     }
 
@@ -43,9 +46,9 @@ const CadastroProduto: React.FC = () => {
         };
 
         launchCamera(options, response => {
-            if(response.didCancel){
+            if (response.didCancel) {
                 console.log('cancelado pelo usuário');
-            } else if(response.error){
+            } else if (response.error) {
                 console.log('erro ao abrir a camera');
             } else {
                 let imageUri = response.uri || response.assets?.[0].uri;
@@ -63,12 +66,12 @@ const CadastroProduto: React.FC = () => {
             maxWidht: 2000
         };
 
-        launchImageLibrary(options, (response)=> {
-            if(response.didCancel){
+        launchImageLibrary(options, (response) => {
+            if (response.didCancel) {
                 console.log('cancelado pelo usuário');
-            } else if (response.error){
+            } else if (response.error) {
                 console.log('erro ao abrir a galeria');
-            } else{
+            } else {
                 let imageUri = response.uri || response.assets?.[0].uri;
                 setImagem(imageUri);
             }
@@ -85,22 +88,22 @@ const CadastroProduto: React.FC = () => {
             <View style={styles.form}>
 
                 <TextInput style={styles.input}
-                placeholder="Nome do Produto"
-                value={nome}
-                onChangeText={setNome}/>
+                    placeholder="Nome do Produto"
+                    value={nome}
+                    onChangeText={setNome} />
 
                 <TextInput style={styles.input}
-                placeholder="Preço"
-                value={preco}
-                onChangeText={setPreco}/>
+                    placeholder="Preço"
+                    value={preco}
+                    onChangeText={setPreco} />
 
                 <TextInput style={styles.input}
-                placeholder="Ingredientes"
-                value={ingredientes}
-                onChangeText={setIngredientes}
-                multiline/>
+                    placeholder="Ingredientes"
+                    value={ingredientes}
+                    onChangeText={setIngredientes}
+                    multiline />
                 <View style={styles.alinhamentoImagemSelecionada}>
-                    {imagem ? <Image source={{ uri: imagem}} style={styles.imagemSelecionada} /> : null}
+                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> : null}
                 </View>
                 <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
                     <Text style={styles.imagemButtonText}>Selecionar Imagem</Text>
