@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, StatusBar, TextInput} from "react-native";
 import * as Animatable from 'react-native-animatable';
 interface MenuItem {
@@ -88,7 +88,23 @@ const renderMenuItem = ({ item }: { item: MenuItem }) => (
 
 );
 
-function CardapioRestauranteExample(): React.JSX.Element {
+function CardapioListagem(): React.JSX.Element {
+    const [quantidade, setQuantidade] = useState(0);
+
+    const incrementar = () => {
+        if (quantidade > 0) {
+            setQuantidade(quantidade + 1);
+        } else {
+            setQuantidade(1);
+        }
+    };
+
+    const decrementar = () => {
+        if (quantidade > 0) {
+            setQuantidade(quantidade - 1);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'#D2B48C'}></StatusBar>
@@ -102,9 +118,7 @@ function CardapioRestauranteExample(): React.JSX.Element {
             <View style={styles.alinhamentoPesquisa}>
                 <TextInput style={styles.input} placeholder="Pesquisar" placeholderTextColor={'black'}/>
                 <Image source={require('./assets/imagens/lupa.eudorio.png')} style={styles.lupa}></Image>
-                
             </View>
-            
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={dados}
@@ -154,8 +168,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
         marginTop: -40
-
-
     },
     imagemH: {
         height: 100,
@@ -258,4 +270,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default CardapioRestauranteExample;
+export default CardapioListagem;
