@@ -83,34 +83,34 @@ const CadastroProduto: React.FC = () => {
         <View style={styles.container}>
             <StatusBar backgroundColor='#3CB371' barStyle='light-content'></StatusBar>
             <View style={styles.header}>
-                <Text style={styles.headerText}>Top Food</Text>
+            <TouchableOpacity onPress={abrirCamera}>
+                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada} /> :
+                        <Image source={require('./imagens/pp.png')} style={styles.imagemSelecionada} />}
+                </TouchableOpacity>
             </View>
+            <TouchableOpacity  onPress={selecionarImagem}>
+                    <Text style={styles.imagemButtonText}>Selecionar Imagem</Text>
+                </TouchableOpacity>
             <View style={styles.form}>
 
                 <TextInput style={styles.input}
-                    placeholder="Nome do Produto"
+                    placeholder="Nome do Produto: "
                     value={nome}
-                    onChangeText={setNome} />
+                    onChangeText={setNome} 
+                    placeholderTextColor={'white'}/>
 
                 <TextInput style={styles.input}
-                    placeholder="Preço"
+                    placeholder="Preço:"
                     value={preco}
-                    onChangeText={setPreco} />
+                    onChangeText={setPreco} 
+                    placeholderTextColor={'white'}/>
 
                 <TextInput style={styles.input}
-                    placeholder="Ingredientes"
+                    placeholder="Ingredientes:"
                     value={ingredientes}
                     onChangeText={setIngredientes}
+                    placeholderTextColor={'white'}
                     multiline />
-                <View style={styles.alinhamentoImagemSelecionada}>
-                    {imagem ? <Image source={{ uri: imagem }} style={styles.imagemSelecionada}/> : null}
-                </View>
-                <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
-                    <Text style={styles.imagemButtonText}>Selecionar Imagem</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imageButton} onPress={abrirCamera}>
-                    <Text style={styles.imagemButtonText}>Tirar Foto</Text>
-                </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={cadastrarProdutos}>
                     <Text style={styles.buttonText}>Cadastrar Produto</Text>
                 </TouchableOpacity>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: 'white'
+        color: ''
     },
     form: {
         padding: 10,
@@ -153,27 +153,32 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderColor: 'white',
         fontWeight: 'bold',
-        marginTop: 10,
+        marginTop: 45,
         marginLeft: 2,
         marginRight: 2
     },
     imageButton: {
         backgroundColor: 'white',
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 15,
         alignItems: 'center',
-        marginBottom: 12
+        marginTop: 20
     },
     imagemButtonText: {
         color: '#3CB371',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: -40,
+        marginLeft: 128
     },
     imagemSelecionada: {
-        width: 150,
-        height: 150,
+        width: 120,
+        height: 120,
         resizeMode: 'cover',
         borderRadius: 100,
-        marginBottom: 10
+        marginTop: -70,
+        marginRight:15,
+        borderWidth: 5,
+        borderColor: '#3CB371'
     },
     alinhamentoImagemSelecionada: {
         alignItems: 'center',
@@ -181,8 +186,12 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
         padding: 10,
-        borderRadius: 5,
-        alignItems: 'center'
+        borderRadius: 15,
+        alignItems: 'center',
+        marginTop: 20,
+        height: 40,
+        width: 300,
+        marginLeft: 35
     },
     buttonText: {
         color: '#3CB371',
@@ -191,7 +200,7 @@ const styles = StyleSheet.create({
     footer: {
         paddingVertical: 50,
         backgroundColor: 'white',
-        marginTop: 170,
+        marginTop: 145,
         alignItems: 'center',
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,

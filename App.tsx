@@ -8,7 +8,7 @@ function App(): React.JSX.Element {
   return (
     //<CardapioRestauranteExample/>
     <CadastroProduto />
-   //<CadastroCliente/>
+  //<CadastroCliente/>
   );
 }
 

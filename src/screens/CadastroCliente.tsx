@@ -24,6 +24,8 @@ function CadastroClienteExample(): React.JSX.Element {
     const [cpf, setCpf] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [foto, setFoto] = useState<any>("");
+    const [error, setError] = useState<string>("");
+    
 
     const cadastrarClientes = async () => {
         try {
@@ -40,13 +42,14 @@ function CadastroClienteExample(): React.JSX.Element {
                 type: 'foto/jpeg',
                 name: new Date() + '.jpg'
             });
-           
+
 
             const response = await axios.post('http://10.137.11.216:8000/api/clientes/cadastro', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
+            console.log(response)
         } catch (error) {
             console.log(error);
         }
@@ -76,8 +79,6 @@ function CadastroClienteExample(): React.JSX.Element {
     }
 
     const selecionarImagem = () => {
-
-        console.log('gay');
         const options = {
             mediaType: 'photo',
             includeBase64: false,
@@ -103,8 +104,12 @@ function CadastroClienteExample(): React.JSX.Element {
         <View style={styles.container}>
             <StatusBar backgroundColor={'white'}></StatusBar>
             <View style={styles.header}>
-                {foto ? <Image source={{ uri: foto }} style={styles.imagem} /> :
-                    <Image source={require('./imagens/p.png')} style={styles.imagem} />}
+                <TouchableOpacity onPress={abrirCamera}>
+                    {foto ? <Image source={{ uri: foto }} style={styles.imagem} /> :
+                        <Image source={require('./imagens/p.png')} style={styles.imagem} />}
+
+                </TouchableOpacity>
+
             </View>
             <TouchableOpacity onPress={selecionarImagem}>
                 <Text style={styles.imageButtonText}>Selecionar Imagem</Text>
@@ -112,7 +117,7 @@ function CadastroClienteExample(): React.JSX.Element {
 
             <View style={styles.form}>
                 <TextInput style={styles.input}
-                    placeholder="Nome"
+                    placeholder="Nome:"
                     placeholderTextColor={'white'}
                     value={nome}
                     onChangeText={setNome}
@@ -120,7 +125,7 @@ function CadastroClienteExample(): React.JSX.Element {
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
-                    placeholder="E-mail"
+                    placeholder="E-mail:"
                     placeholderTextColor={'white'}
                     value={email}
                     onChangeText={setEmail}
@@ -128,7 +133,7 @@ function CadastroClienteExample(): React.JSX.Element {
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
-                    placeholder="CPF"
+                    placeholder="CPF:"
                     placeholderTextColor={'white'}
                     value={cpf}
                     onChangeText={setCpf}
@@ -137,7 +142,7 @@ function CadastroClienteExample(): React.JSX.Element {
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
-                    placeholder="Endereço"
+                    placeholder="Endereço:"
                     placeholderTextColor={'white'}
                     value={endereco}
                     onChangeText={setEndereco}
@@ -145,7 +150,7 @@ function CadastroClienteExample(): React.JSX.Element {
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
-                    placeholder="Telefone"
+                    placeholder="Telefone:"
                     placeholderTextColor={'white'}
                     value={telefone}
                     onChangeText={setTelefone}
@@ -153,7 +158,7 @@ function CadastroClienteExample(): React.JSX.Element {
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
-                    placeholder="Password"
+                    placeholder="Password:"
                     placeholderTextColor={'white'}
                     value={password}
                     onChangeText={setPassword}
@@ -168,7 +173,7 @@ function CadastroClienteExample(): React.JSX.Element {
             </View>
 
         </View>
-        
+
     );
 }
 
@@ -207,9 +212,9 @@ const styles = StyleSheet.create({
         height: 50,
         borderBottomWidth: 2,
         borderColor: '#fff',
-        color:'white',
-        paddingLeft:10,
-        marginLeft:10,
+        color: 'white',
+        paddingLeft: 10,
+        marginLeft: 10,
         marginRight: 10
     },
     imagem: {
@@ -217,7 +222,9 @@ const styles = StyleSheet.create({
         width: 100,
         marginTop: -60,
         marginRight: 15,
-        borderRadius: 40
+        borderRadius: 40,
+        borderWidth: 5,
+        borderColor: '#3CB371'
     },
     button: {
         backgroundColor: "white",
