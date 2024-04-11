@@ -51,9 +51,12 @@ function CadastroClienteExample(): React.JSX.Element {
             });
             console.log(response)
         } catch (error) {
-            console.log(error);
+            if (error.response && error.response.data && error.response.data.error){
+                setError(error.response.data.error);
+            } else{
+                setError("Ocorreu um erro ao enviar o formulário.")
+            }
         }
-
     }
 
 
@@ -222,7 +225,7 @@ const styles = StyleSheet.create({
         width: 100,
         marginTop: -60,
         marginRight: 15,
-        borderRadius: 40,
+        borderRadius: 50,
         borderWidth: 5,
         borderColor: '#3CB371'
     },
