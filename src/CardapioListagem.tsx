@@ -12,6 +12,9 @@ interface Produtos {
 
 function CardapioListagem(): React.JSX.Element {
     const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [item, setItem] = useState<Produtos[]>([]);
+    const [carrinho, setCarrinho] = useState<{ [key: string]: number }>({});
+    const [mensagemSucesso, setMensagemSucesso] = useState('');
 
     useEffect(() => {
         const fetchProdutos = async () => {
@@ -26,6 +29,26 @@ function CardapioListagem(): React.JSX.Element {
         fetchProdutos();
     }, []);
 
+    const adicionarAoCarrinho = (item: Produtos) => {
+        if (carrinho[item.id]) {
+          setCarrinho({ ...carrinho, [item.id]: carrinho[item.id] + 1 });
+        } else {
+          setCarrinho({ ...carrinho, [item.id]: 1 });
+        }
+        setMensagemSucesso('Produto adicionado com sucesso');
+        return carrinho;
+      };
+
+      const removerCarrinho = (item: Produtos ) => {
+        if(carrinho[item.id]) {
+            setCarrinho({... carrinho, [item.id]: carrinho[item.id] - 1});
+        } else {
+            setCarrinho({...carrinho, [item.id]: 1});
+            return carrinho;
+        }
+      };
+    
+      const totalCarrinho = Object.values(carrinho).reduce((total, quantidade) => total + quantidade, 0);
     
 
     const renderProdutoItem = ({ item }: { item: Produtos }) => (
@@ -34,10 +57,10 @@ function CardapioListagem(): React.JSX.Element {
             <Text style={styles.text}>{item.descricao}</Text>
             <Text style={styles.textPreco}>{item.preco}</Text>
             <Image source={{ uri: item.image}} style={styles.imagemH} />
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => adicionarAoCarrinho(item)}>
             <Image source={require('./assets/imagens/mais.png')} style={styles.maisImagem}></Image>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => removerCarrinho(item)}>
         <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
         </TouchableOpacity>
         </View>
@@ -51,6 +74,11 @@ function CardapioListagem(): React.JSX.Element {
                 <Text style={styles.headerText}>FOOD KING</Text>
                 <TouchableOpacity> 
                 <Image source={require('./assets/imagens/mercado.png')} style={styles.carrinho}></Image>
+                {totalCarrinho > 0 && (
+          <View style={styles.carrinhoBadge}>
+            <Text style={styles.carrinhoBadgeText}>{totalCarrinho}</Text>
+          </View>
+        )}
                 </TouchableOpacity>
             </Animatable.View>
             <View style={styles.alinhamentoPesquisa}>
@@ -206,6 +234,26 @@ const styles = StyleSheet.create({
         width: 30,
         marginTop: 10,
         marginLeft: 5
+    },
+    carrinhoBadge: {
+        position: "absolute",
+        right: -6,
+        top: -3,
+        backgroundColor: "#2E8B57",
+        borderRadius: 10,
+        width: 20,
+        height: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      carrinhoBadgeText: {
+        color: "white",
+        fontWeight: "bold",
+      },
+      mensagemSucessoText: {
+        color: '#155724',
+        fontSize: 16,
+        textAlign: 'center',
     },
 
 });
