@@ -7,7 +7,7 @@ interface Produtos {
     nome: string;
     preco: string;
     descricao: string,
-    image: any;
+    imagem: any;
 }
 
 function CardapioListagem(): React.JSX.Element {
@@ -21,6 +21,7 @@ function CardapioListagem(): React.JSX.Element {
             try {
                 const response = await axios.get('http://10.137.11.216/api/produtos');
                 setProdutos(response.data);
+                //console.log(response);
             } catch (error) {
                 console.error('Erro ao buscar produtos:', error);
             }
@@ -56,7 +57,7 @@ function CardapioListagem(): React.JSX.Element {
             <Text style={styles.textNome}>{item.nome}</Text>
             <Text style={styles.text}>{item.descricao}</Text>
             <Text style={styles.textPreco}>{item.preco}</Text>
-            <Image source={ item.image ?  { uri: item.image } : require('./assets/imagens/h.png')} style={styles.imagemH} />
+            <Image source={ item.imagem ?  { uri: item.imagem } : require('./assets/imagens/h.png')} style={styles.imagemH} />
             <TouchableOpacity onPress={() => adicionarAoCarrinho(item)}>
             <Image source={require('./assets/imagens/mais.png')} style={styles.maisImagem}></Image>
         </TouchableOpacity>
@@ -139,7 +140,8 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
         marginTop: -110,
-        marginLeft: 200
+        marginLeft: 200,
+        borderRadius: 50
 
     },
     footer: {
