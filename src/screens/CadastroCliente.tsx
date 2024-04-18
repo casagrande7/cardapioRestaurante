@@ -24,10 +24,47 @@ function CadastroClienteExample(): React.JSX.Element {
     const [cpf, setCpf] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [foto, setFoto] = useState<any>("");
-    const [error, setError] = useState<string>("");
+    const [errors, setErrors] = useState<string>("");
+
+    const validateForm = () => {
+        const newErrors: any = {};
+    
+        if (!nome) {
+          newErrors.nome = "O campo nome é obrigatório";
+        }
+    
+        if (!email) {
+          newErrors.email = "O campo e-mail é obrigatório";
+        }
+    
+        if (!endereco) {
+          newErrors.endereco = "O campo endereço é obrigatório";
+        }
+    
+        if (!telefone) {
+          newErrors.telefone = "O campo telefone é obrigatório";
+        }
+    
+        if (!password) {
+          newErrors.password = "O campo senha é obrigatório";
+        }
+    
+        if (!cpf) {
+          newErrors.cpf = "O campo CPF é obrigatório";
+        }
+    
+        if (!Image) {
+          newErrors.imagem = "Por favor, selecione uma imagem";
+        }
+    
+        setErrors(newErrors);
+    
+        return !Object.keys(newErrors).length;
+      };
     
 
     const cadastrarClientes = async () => {
+        if (validateForm()){    
         try {
 
             const formData = new FormData();
@@ -51,13 +88,15 @@ function CadastroClienteExample(): React.JSX.Element {
             });
             console.log(response)
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.error){
-                setError(error.response.data.error);
+            if (error.response && error.response.data && error.response.data.errors){
+                setErrors(error.response.data.errors);
             } else{
-                setError("Ocorreu um erro ao enviar o formulário.")
+                console.log(error);
             }
         }
     }
+
+}
 
 
     const abrirCamera = () => {
@@ -125,6 +164,8 @@ function CadastroClienteExample(): React.JSX.Element {
                     value={nome}
                     onChangeText={setNome}
                 />
+                {errors.nome && <Text style={styles.errorText}>{errors.nome}</Text>}
+                
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
@@ -133,6 +174,8 @@ function CadastroClienteExample(): React.JSX.Element {
                     value={email}
                     onChangeText={setEmail}
                 />
+                {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
+               
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
@@ -141,7 +184,8 @@ function CadastroClienteExample(): React.JSX.Element {
                     value={cpf}
                     onChangeText={setCpf}
                 />
-
+                {errors.cpf && <Text style={styles.errorText}>{errors.cpf}</Text>}
+                
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
@@ -150,6 +194,7 @@ function CadastroClienteExample(): React.JSX.Element {
                     value={endereco}
                     onChangeText={setEndereco}
                 />
+                {errors.endereco && <Text style={styles.errorText}>{errors.endereco}</Text>}
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
@@ -158,6 +203,7 @@ function CadastroClienteExample(): React.JSX.Element {
                     value={telefone}
                     onChangeText={setTelefone}
                 />
+                {errors.telefone && <Text style={styles.errorText}>{errors.telefone}</Text>}
             </View>
             <View style={styles.form}>
                 <TextInput style={styles.input}
@@ -166,17 +212,15 @@ function CadastroClienteExample(): React.JSX.Element {
                     value={password}
                     onChangeText={setPassword}
                 />
+                {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
+                
             </View>
             <TouchableOpacity style={styles.button} onPress={cadastrarClientes}>
                 <Text style={styles.buttonText}>Cadastrar</Text>
             </TouchableOpacity>
-
             <View style={styles.footer}>
-
             </View>
-
         </View>
-
     );
 }
 
@@ -196,7 +240,7 @@ const styles = StyleSheet.create({
     footer: {
         paddingVertical: 50,
         backgroundColor: 'white',
-        marginTop: 40,
+        marginTop: 80,
         alignItems: 'center',
         borderTopRightRadius: 40,
         borderTopLeftRadius: 40,
@@ -210,7 +254,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: 'transparent',
-        marginTop: 40,
+        marginTop: 32,
         fontWeight: 'bold',
         height: 50,
         borderBottomWidth: 2,
@@ -249,7 +293,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: -40,
         marginLeft: 125
-    }
+    },
+    errorText: {
+        fontWeight: 'bold',
+        marginLeft: 10,
+        color: 'black'
+    },
 
 })
 

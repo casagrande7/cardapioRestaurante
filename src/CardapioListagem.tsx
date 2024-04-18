@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, StatusBar, TextInput} from "react-native";
 import * as Animatable from 'react-native-animatable';
-interface MenuItem {
+interface Produtos {
     id: string;
     nome: string;
     preco: string;
@@ -9,106 +10,43 @@ interface MenuItem {
     image: any;
 }
 
-const dados: MenuItem[] = [
-    {
-        id: '1', nome: 'Hambúrguer: X BACON', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon.',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '2', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '3', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '4', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '5', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '6', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '7', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '8', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '9', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '10', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '11', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '12', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '13', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '14', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-    {
-        id: '15', nome: 'Hambúrguer: ', preco: 'R$20,00', descricao: 'Pão de brioche, 2 carnes, alface, tomate, queijo, bacon',
-        image: require('./assets/imagens/h.png')
-    },
-];
+function CardapioListagem(): React.JSX.Element {
+    const [produtos, setProdutos] = useState<Produto[]>([]);
 
-const renderMenuItem = ({ item }: { item: MenuItem }) => (
-    <View style={styles.item}>
-        <Text style={styles.textNome}>{item.nome}</Text>
-        <Text style={styles.text}>{item.descricao}</Text>
-        <Text style={styles.textPreco}>{item.preco}</Text>
-        <Image source={item.image} style={styles.imagemH}></Image>
-        <TouchableOpacity>
+    useEffect(() => {
+        const fetchProdutos = async () => {
+            try {
+                const response = await axios.get('http://10.137.11.216:8000/api/produtos');
+                setProdutos(response.data);
+            } catch (error) {
+                console.error('Erro ao buscar produtos:', error);
+            }
+        };
+
+        fetchProdutos();
+    }, []);
+
+    
+
+    const renderProdutoItem = ({ item }: { item: Produtos }) => (
+        <View style={styles.item}>
+            <Text style={styles.textNome}>{item.nome}</Text>
+            <Text style={styles.text}>{item.descricao}</Text>
+            <Text style={styles.textPreco}>{item.preco}</Text>
+            <Image source={{ uri: item.image}} style={styles.imagemH} />
+            <TouchableOpacity>
             <Image source={require('./assets/imagens/mais.png')} style={styles.maisImagem}></Image>
         </TouchableOpacity>
         <TouchableOpacity>
         <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
         </TouchableOpacity>
-    </View>
-
-);
-
-function CardapioListagem(): React.JSX.Element {
-    const [quantidade, setQuantidade] = useState(0);
-
-    const incrementar = () => {
-        if (quantidade > 0) {
-            setQuantidade(quantidade + 1);
-        } else {
-            setQuantidade(1);
-        }
-    };
-
-    const decrementar = () => {
-        if (quantidade > 0) {
-            setQuantidade(quantidade - 1);
-        }
-    };
+        </View>
+    );
 
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'#D2B48C'}></StatusBar>
-            <Animatable.View  animation={'fadeInDown'} delay={30} style={styles.header}>
+            <Animatable.View  animation={'fadeInDown'} delay={30}  style={styles.header}>
                 <Image source={require('./assets/imagens/hh.png')} style={styles.imagem}></Image>
                 <Text style={styles.headerText}>FOOD KING</Text>
                 <TouchableOpacity> 
@@ -119,12 +57,14 @@ function CardapioListagem(): React.JSX.Element {
                 <TextInput style={styles.input} placeholder="Pesquisar" placeholderTextColor={'black'}/>
                 <Image source={require('./assets/imagens/lupa.eudorio.png')} style={styles.lupa}></Image>
             </View>
-            <FlatList
-                showsVerticalScrollIndicator={false}
-                data={dados}
-                renderItem={renderMenuItem}
-                keyExtractor={(item) => item.id}
-            />
+            
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={produtos}
+                    renderItem={renderProdutoItem}
+                    keyExtractor={(item) => item.id}
+                />
+            
             <Animatable.View animation={'fadeInUp'} delay={30} style={styles.footer}>
                 <TouchableOpacity>
                     <Image source={require('./assets/imagens/i.png')} style={styles.footerIcon} />
@@ -145,7 +85,7 @@ function CardapioListagem(): React.JSX.Element {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#98FB98'
     },
     item: {
         backgroundColor: '#D2B48C',
@@ -183,7 +123,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         paddingVertical: 10,
-        borderRadius: 12
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
 
     },
     footerIcon: {
@@ -264,9 +205,8 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         marginTop: 10,
-        marginLeft: 10
-
-    }
+        marginLeft: 5
+    },
 
 });
 

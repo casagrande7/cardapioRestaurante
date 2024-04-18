@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, StatusBar, TextInput} from "react-native";
 import * as Animatable from 'react-native-animatable';
 interface MenuItem {
@@ -84,8 +84,7 @@ const renderMenuItem = ({ item }: { item: MenuItem }) => (
         <TouchableOpacity>
         <Image source={require('./assets/imagens/subtracao.png')} style={styles.subtracaoImagem}></Image>
         </TouchableOpacity>
-    </View>
-
+        </View>
 );
 
 function CardapioRestauranteExample(): React.JSX.Element {
@@ -131,7 +130,7 @@ function CardapioRestauranteExample(): React.JSX.Element {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#98FB98'
     },
     item: {
         backgroundColor: '#D2B48C',
@@ -171,7 +170,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         paddingVertical: 10,
-        borderRadius: 12
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
 
     },
     footerIcon: {
@@ -252,9 +252,8 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         marginTop: 10,
-        marginLeft: 10
-
-    }
+        marginLeft: 5
+    },
 
 });
 

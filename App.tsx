@@ -7,11 +7,10 @@ import CardapioListagem from "./src/CardapioListagem";
 
 function App(): React.JSX.Element {
   return (
-    //<CardapioListagem/>
+    <CardapioListagem/>
     //<CardapioRestauranteExample/>
     //<CadastroProduto />
-  <CadastroCliente/>
+   //<CadastroCliente/>
   );
 }
-
 export default App;

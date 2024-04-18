@@ -24,7 +24,7 @@ const CadastroProduto: React.FC = () => {
             });
 
             console.log(formData)
-            const response = await axios.post('http://10.137.11.216:8000/api/produtos', formData, {
+            const response = await axios.post('http://10.137.11.216:8000/api/produtos/cadastro', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
