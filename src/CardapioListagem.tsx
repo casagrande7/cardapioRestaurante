@@ -43,7 +43,7 @@ function CardapioListagem(): React.JSX.Element {
         if(carrinho[item.id]) {
             setCarrinho({... carrinho, [item.id]: carrinho[item.id] - 1});
         } else {
-            setCarrinho({...carrinho, [item.id]: 1});
+            setCarrinho({...carrinho, [item.id]: 0});
             return carrinho;
         }
       };
@@ -56,7 +56,7 @@ function CardapioListagem(): React.JSX.Element {
             <Text style={styles.textNome}>{item.nome}</Text>
             <Text style={styles.text}>{item.descricao}</Text>
             <Text style={styles.textPreco}>{item.preco}</Text>
-            <Image source={{ uri: item.image}} style={styles.imagemH} />
+            <Image source={ item.image ?  { uri: item.image } : require('./assets/imagens/h.png')} style={styles.imagemH} />
             <TouchableOpacity onPress={() => adicionarAoCarrinho(item)}>
             <Image source={require('./assets/imagens/mais.png')} style={styles.maisImagem}></Image>
         </TouchableOpacity>
@@ -85,14 +85,12 @@ function CardapioListagem(): React.JSX.Element {
                 <TextInput style={styles.input} placeholder="Pesquisar" placeholderTextColor={'black'}/>
                 <Image source={require('./assets/imagens/lupa.eudorio.png')} style={styles.lupa}></Image>
             </View>
-            
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={produtos}
                     renderItem={renderProdutoItem}
                     keyExtractor={(item) => item.id}
                 />
-            
             <Animatable.View animation={'fadeInUp'} delay={30} style={styles.footer}>
                 <TouchableOpacity>
                     <Image source={require('./assets/imagens/i.png')} style={styles.footerIcon} />
