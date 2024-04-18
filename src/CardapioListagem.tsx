@@ -19,7 +19,7 @@ function CardapioListagem(): React.JSX.Element {
     useEffect(() => {
         const fetchProdutos = async () => {
             try {
-                const response = await axios.get('http://10.137.11.216:8000/api/produtos');
+                const response = await axios.get('http://10.137.11.216/api/produtos');
                 setProdutos(response.data);
             } catch (error) {
                 console.error('Erro ao buscar produtos:', error);

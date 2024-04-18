@@ -15,7 +15,6 @@ interface Clientes {
     foto: any
 }
 
-
 function CadastroClienteExample(): React.JSX.Element {
     const [nome, setNome] = useState<string>("");
     const [email, setEmail] = useState<string>("");
