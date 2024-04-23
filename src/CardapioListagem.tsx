@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, StatusBar, TextInput} from "react-native";
 import * as Animatable from 'react-native-animatable';
+import { useNavigation } from "@react-navigation/native";
+
 interface Produtos {
     id: string;
     nome: string;
@@ -67,6 +69,8 @@ function CardapioListagem(): React.JSX.Element {
         </View>
     );
 
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <StatusBar backgroundColor={'#D2B48C'}></StatusBar>
@@ -93,16 +97,16 @@ function CardapioListagem(): React.JSX.Element {
                     keyExtractor={(item) => item.id}
                 />
             <Animatable.View animation={'fadeInUp'} delay={30} style={styles.footer}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('CardapioRestauranteExample')}>
                     <Image source={require('./assets/imagens/i.png')} style={styles.footerIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('CardapioListagem')}>
                     <Image source={require('./assets/imagens/ll.png')} style={styles.footerIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('CadastroCliente')}>
                     <Image source={require('./assets/imagens/p.png')} style={styles.footerIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('CadastroProduto')}>
                     <Image source={require('./assets/imagens/cardapio.png')} style={styles.footerIcon} />
                 </TouchableOpacity>
             </Animatable.View>
