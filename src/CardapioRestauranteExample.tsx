@@ -160,7 +160,7 @@ const renderMenuItem = ({ item }: { item: MenuItem }) => (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#98FB98'
+        backgroundColor: 'white'
     },
     item: {
         backgroundColor: '#D2B48C',
